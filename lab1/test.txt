@@ -1,0 +1,16 @@
+1a
+select * from prereq;
+1b
+select * from student where dept_name = 'Physics';
+1c
+select dept_name, title, credits from course where dept_name = 'Biology';
+2
+select * from student, instructor where student.dept_name = instructor.dept_name;
+3
+select count from course where credits = 4;
+4a
+(select course_id from section where semester = 'Fall') intersect (select course_id from section where year = 2009)
+4b
+(select course_id from section where semester = 'Fall') union (select course_id from section where year = 2009)
+0
+

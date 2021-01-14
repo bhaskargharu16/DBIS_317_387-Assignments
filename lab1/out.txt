@@ -1,0 +1,50 @@
+Query Type? Enter your query: BIO-301,BIO-101
+BIO-399,BIO-101
+CS-190,CS-101
+CS-315,CS-101
+CS-319,CS-101
+CS-347,CS-101
+EE-181,PHY-101
+Query Type? Enter your query: 44553,Peltier,Physics,56
+45678,Levy,Physics,46
+70557,Snow,Physics,0
+Query Type? Enter your query: Biology,Intro. to Biology,4
+Biology,Genetics,4
+Biology,Computational Biology,3
+Query Type? Enter your query: 00128,Zhang,Comp. Sci.,102,10101,Srinivasan,Comp. Sci.,65000
+00128,Zhang,Comp. Sci.,102,45565,Katz,Comp. Sci.,75000
+00128,Zhang,Comp. Sci.,102,83821,Brandt,Comp. Sci.,92000
+12345,Shankar,Comp. Sci.,32,10101,Srinivasan,Comp. Sci.,65000
+12345,Shankar,Comp. Sci.,32,45565,Katz,Comp. Sci.,75000
+12345,Shankar,Comp. Sci.,32,83821,Brandt,Comp. Sci.,92000
+19991,Brandt,History,80,32343,El Said,History,60000
+19991,Brandt,History,80,58583,Califieri,History,62000
+23121,Chavez,Finance,110,12121,Wu,Finance,90000
+23121,Chavez,Finance,110,76543,Singh,Finance,80000
+44553,Peltier,Physics,56,22222,Einstein,Physics,95000
+44553,Peltier,Physics,56,33456,Gold,Physics,87000
+45678,Levy,Physics,46,22222,Einstein,Physics,95000
+45678,Levy,Physics,46,33456,Gold,Physics,87000
+54321,Williams,Comp. Sci.,54,10101,Srinivasan,Comp. Sci.,65000
+54321,Williams,Comp. Sci.,54,45565,Katz,Comp. Sci.,75000
+54321,Williams,Comp. Sci.,54,83821,Brandt,Comp. Sci.,92000
+55739,Sanchez,Music,38,15151,Mozart,Music,40000
+70557,Snow,Physics,0,22222,Einstein,Physics,95000
+70557,Snow,Physics,0,33456,Gold,Physics,87000
+76543,Brown,Comp. Sci.,58,10101,Srinivasan,Comp. Sci.,65000
+76543,Brown,Comp. Sci.,58,45565,Katz,Comp. Sci.,75000
+76543,Brown,Comp. Sci.,58,83821,Brandt,Comp. Sci.,92000
+76653,Aoi,Elec. Eng.,60,98345,Kim,Elec. Eng.,80000
+98765,Bourikas,Elec. Eng.,98,98345,Kim,Elec. Eng.,80000
+98988,Tanaka,Biology,120,76766,Crick,Biology,72000
+Query Type? Enter your query: 5
+Query Type? Enter your query: CS-101
+CS-347
+PHY-101
+Query Type? Enter your query: CS-101
+PHY-101
+EE-181
+BIO-101
+CS-190
+CS-347
+Query Type? exiting...
