@@ -38,13 +38,13 @@ Query Type? Enter your query: 00128,Zhang,Comp. Sci.,102,10101,Srinivasan,Comp. 
 98765,Bourikas,Elec. Eng.,98,98345,Kim,Elec. Eng.,80000
 98988,Tanaka,Biology,120,76766,Crick,Biology,72000
 Query Type? Enter your query: 5
-Query Type? Enter your query: CS-101
+Query Type? Enter your query: CS-347
+CS-101
 PHY-101
-CS-347
 Query Type? Enter your query: CS-190
-BIO-101
-EE-181
 CS-347
 CS-101
+EE-181
+BIO-101
 PHY-101
 Query Type? exiting...

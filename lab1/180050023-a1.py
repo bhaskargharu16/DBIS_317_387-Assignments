@@ -1,12 +1,13 @@
 import csv
-def preprocess_query(query):
+def preprocess_query(query,flag):
+    if query[-1] != ';' and not(flag):
+        query += ';'
     before_from = []
     relations = []
     after_where = []
     from_split = query.split("from")
     where_split = query.split("where")
     for token in from_split[0].split()[1:]:
-        # before_from.append(token)
         before_from += [x for x in token.split(',') if x]
     for token in from_split[1].split():
         if token == "where":
@@ -25,7 +26,10 @@ def preprocess_query(query):
         after_where.append(val[0])
     return before_from,relations,after_where
 def query_1a(query):
-    _,relations,_ = preprocess_query(query)
+    _,relations,_ = preprocess_query(query,False)
+    if relations[-1] == ';':
+        relations = relations[:-1]
+        relations[0] += ';'
     with open("csv-files/"+relations[-1][:-1]+".csv") as f:
         reader = csv.reader(f)
         i = 0
@@ -34,7 +38,17 @@ def query_1a(query):
                 print(','.join(row))
             i = i+1
 def query_1b(query):
-    _,relations,after_where = preprocess_query(query)
+    _,relations,after_where = preprocess_query(query,False)
+    a = []
+    for x in after_where:
+        a += x.split()
+    after_where = a
+    if after_where[-1] == ';':
+        after_where = after_where[:-1]
+    if len(after_where) > 2:
+        x = " ".join([after_where[-2],after_where[-1]])
+        after_where[-2] = x
+        after_where = after_where[:-1]
     with open("csv-files/"+relations[-1]+".csv") as f:
         reader = csv.reader(f)
         reader = list(reader)
@@ -53,9 +67,19 @@ def query_1b(query):
             if row[column_name_idx] == desired:
                 print(','.join(row))
 def query_1c(query):
-    before_from,relations,after_where = preprocess_query(query)
+    before_from,relations,after_where = preprocess_query(query,False)
     for idx,token in enumerate(before_from[:-1]):
         before_from[idx] = token
+    a = []
+    for x in after_where:
+        a += x.split()
+    after_where = a
+    if after_where[-1] == ';':
+        after_where = after_where[:-1]
+    if len(after_where) > 2:
+        x = " ".join([after_where[-2],after_where[-1]])
+        after_where[-2] = x
+        after_where = after_where[:-1]
     with open("csv-files/"+relations[-1]+".csv") as f:
         reader = csv.reader(f)
         reader = list(reader)
@@ -79,13 +103,20 @@ def query_1c(query):
             if row[column_name_idx] == desired:
                 print(','.join([row[i] for i in desired_column_ids]))
 def query_2(query):
-    _,relations,after_where = preprocess_query(query)
-    f1  = open("csv-files/"+relations[0][:-1]+".csv")
+    _,relations,after_where = preprocess_query(query,False)
+    after_where = [x.split()[0] for x in after_where]
+    if after_where[-1] == ';':
+        after_where = after_where[:-1]
+    relations = ''.join([x.split()[0] for x in relations])
+    relations = relations.split(',')
+    f1  = open("csv-files/"+relations[0]+".csv")
     f2 = open("csv-files/"+relations[-1]+".csv")
     data1 = list(csv.reader(f1))
     data2 = list(csv.reader(f2))
     attribute1 = after_where[0].split('.')[1]
-    attribute2 = after_where[-1].split('.')[1][:-1]
+    attribute2 = after_where[-1].split('.')[1]
+    if attribute2[-1] == ';':
+        attribute2 = attribute2[:-1]
     attribute1_idx = 0
     for idx,token in enumerate(data1[0]):
         if token == attribute1:
@@ -99,8 +130,11 @@ def query_2(query):
             if row1[attribute1_idx] == row2[attribute2_idx]:
                 print(','.join(row1 +row2))
 def query_3(query):
-    _,relations,after_where = preprocess_query(query)
+    _,relations,after_where = preprocess_query(query,False)
     count = 0
+    after_where = [x.split()[0] for x in after_where]
+    if after_where[-1] == ';':
+        after_where = after_where[:-1]
     with open("csv-files/"+relations[-1]+".csv") as f:
         reader = csv.reader(f)
         reader = list(reader)
@@ -121,14 +155,17 @@ def query_3(query):
     print(count)
 def preprocess_query4(query,splitter):
     query = query.split(splitter)
-    query_1 = query[0][1:-1]
+    # query_1 = query[0][1:-1]
+    query_1 = query[0]
+    query_1 = query_1.split("(")[-1].split(")")[0]
     query_2 = query[-1]
-    if query_2[-1] == ";":
-        query_2 = query[-1][1:-2]
-    else:
-        query_2 = query[-1][1:-1]
-    before_from1,relations1,after_where1 = preprocess_query(query_1)
-    before_from2,relations2,after_where2 = preprocess_query(query_2)
+    query_2 = query_2.split("(")[-1].split(")")[0]
+    # if query_2[-1] == ";":
+    #     query_2 = query[-1][1:-2]
+    # else:
+    #     query_2 = query[-1][1:-1]
+    before_from1,relations1,after_where1 = preprocess_query(query_1,True)
+    before_from2,relations2,after_where2 = preprocess_query(query_2,True)
     return before_from1,relations1,after_where1,before_from2,relations2,after_where2
 def helper(before_from,relations,after_where):
     lst = []
@@ -153,14 +190,14 @@ def helper(before_from,relations,after_where):
                 lst.append(row[selected_col_idx])
         return lst
 def query_4a(query):
-    splitter = " intersect "
+    splitter = "intersect"
     before_from1,relations1,after_where1,before_from2,relations2,after_where2 = preprocess_query4(query,splitter)
     set1 = helper(before_from1,relations1,after_where1)
     set2 = helper(before_from2,relations2,after_where2)
     intersection = list(set(set1) & set(set2))
     print(*intersection,sep='\n')
 def query_4b(query):
-    splitter = " union "
+    splitter = "union"
     before_from1,relations1,after_where1,before_from2,relations2,after_where2 = preprocess_query4(query,splitter)
     set1 = helper(before_from1,relations1,after_where1)
     set2 = helper(before_from2,relations2,after_where2)

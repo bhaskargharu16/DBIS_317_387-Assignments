@@ -1,16 +1,23 @@
 1a
-select * from prereq;
+select * from prereq
 1b
-select * from student where dept_name = 'Physics';
+select * from student where dept_name = 'Physics'
 1c
-select dept_name, title, credits from course where dept_name = 'Biology';
+select dept_name, title, credits from course where dept_name = 'Biology'
 2
-select * from student, instructor where student.dept_name = instructor.dept_name;
+select * from student , instructor where student.dept_name = instructor.dept_name
 3
-select count from course where credits = 4;
+select count from course where credits = 4
 4a
 (select course_id from section where semester = 'Fall') intersect (select course_id from section where year = 2009)
 4b
-(select course_id from section where semester = 'Fall') union (select course_id from section where year = 2009)
+(select course_id from section where semester = 'Fall') union (select course_id from section where year = 2009);
 0
 
+ID,name,dept_name
+
+select * from student , instructor where student.dept_name = instructor.dept_name
+
+(  select course_id from section where semester = 'Fall'  )   union   (  select course_id from section where year = 2009  )  ;
+
+(            select course_id    from course where title    =  'Intro. to Biology'    )    union(  select course_id from course        where dept_name =     'Comp. Sci.'        )
