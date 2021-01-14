@@ -6,7 +6,8 @@ def preprocess_query(query):
     from_split = query.split("from")
     where_split = query.split("where")
     for token in from_split[0].split()[1:]:
-        before_from.append(token)
+        # before_from.append(token)
+        before_from += [x for x in token.split(',') if x]
     for token in from_split[1].split():
         if token == "where":
             break
@@ -23,7 +24,6 @@ def preprocess_query(query):
     else:
         after_where.append(val[0])
     return before_from,relations,after_where
-
 def query_1a(query):
     _,relations,_ = preprocess_query(query)
     with open("csv-files/"+relations[-1][:-1]+".csv") as f:
@@ -55,7 +55,7 @@ def query_1b(query):
 def query_1c(query):
     before_from,relations,after_where = preprocess_query(query)
     for idx,token in enumerate(before_from[:-1]):
-        before_from[idx] = token[:-1]
+        before_from[idx] = token
     with open("csv-files/"+relations[-1]+".csv") as f:
         reader = csv.reader(f)
         reader = list(reader)
